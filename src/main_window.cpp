@@ -1,5 +1,16 @@
+/**
+ * @file: main_window.cpp
+ * 
+ * @brief: implementation of the GUI main window
+ * 
+ * @date:
+ * - created on 2025-05-22
+ * - updated on 2025-05-22
+ **/
+
 #include "main_window.hpp"
-#include <QWidget>
+#include "display_widget.hpp"
+#include <QSize>
 
 namespace
 {
@@ -19,8 +30,10 @@ MainWindow::~MainWindow() = default;
 void MainWindow::setupUi()
 {
 	setFixedSize(MAIN_WINDOW_SIZE);
-	// Optionally set window title or other properties here
-	setWindowTitle("Empty Main Window");
+	setWindowTitle("Display Main Window");
+
+	auto* display = new DisplayWidget(this);
+	setCentralWidget(display);
 }
 
 } // namespace rf

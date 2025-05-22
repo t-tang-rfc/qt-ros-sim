@@ -1,13 +1,13 @@
 /**
- * @file main_window.hpp
+ * @file: main_window.hpp
  * 
- * @brief GUI main window
+ * @brief: GUI main window
  * 
- * @details
+ * @details:
  * The GUI mainwindow contains:
  * - a display widget
  * 
- * @date
+ * @date:
  * - created on 2025-05-22
  * - updated on 2025-05-22
  **/
@@ -16,6 +16,7 @@
 #define MAIN_WINDOW_HPP
 
 #include <QMainWindow>
+#include <QWidget>
 
 namespace rf
 {
