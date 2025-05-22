@@ -1,0 +1,5 @@
+# Auxiliary files
+.vscode/
+
+# Build artifacts
+build/
