@@ -1,5 +1,12 @@
+# Temporary files
+tmp*
+
+# Private files
+.private.*
+
 # Auxiliary files
 .vscode/
+.cspell/
 
 # Build artifacts
 build/
