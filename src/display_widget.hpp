@@ -41,7 +41,7 @@ class DisplayWidget : public QQuickWidget
 		void keyPressEvent(QKeyEvent* event) override;
 
 	private:
-		QList<qreal> robot_pose; // a 6-element list for robot pose tracking
+		QList<qreal> robot_pose_; // a 6-element list for robot pose tracking
 
 	/// <<<
 };

@@ -23,15 +23,15 @@ namespace {
 namespace rf {
 
 MainWindow::MainWindow(QWidget* parent)
-: QMainWindow(parent)
+	: QMainWindow(parent)
 {
 	// Set the main window size and title
 	setFixedSize(MAIN_WINDOW_SIZE);
 	setWindowTitle("Display Main Window");
 
 	// Create and set the display widget as the central widget
-	auto* display = new DisplayWidget(this);
-	setCentralWidget(display);
+	auto* display_widget = new DisplayWidget(this);
+	setCentralWidget(display_widget);
 }
 
 MainWindow::~MainWindow() = default;

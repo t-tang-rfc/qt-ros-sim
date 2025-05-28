@@ -26,17 +26,19 @@ namespace rf {
 
 RobotControllerDelegate::RobotControllerDelegate(QObject *parent)
 	: QObject(parent)
-	, m_pose(DEFAULT_POSE)
+	, pose_(DEFAULT_POSE)
 {
 	// Initialize with the same default values as in QML
 }
 
-QList<qreal> RobotControllerDelegate::getPose() const { return m_pose; }
+RobotControllerDelegate::~RobotControllerDelegate() = default;
+
+QList<qreal> RobotControllerDelegate::getPose() const { return pose_; }
 
 void RobotControllerDelegate::setPose(const QList<qreal>& pose)
 {
-	if (m_pose != pose) {
-		m_pose = pose;
+	if (pose_ != pose) {
+		pose_ = pose;
 		emit poseChanged();
 	}
 }

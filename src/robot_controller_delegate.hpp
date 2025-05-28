@@ -28,6 +28,7 @@ class RobotControllerDelegate : public QObject
 
 	public:
 		explicit RobotControllerDelegate(QObject *parent = nullptr);
+		~RobotControllerDelegate();
 
 		QList<qreal> getPose() const;
 
@@ -37,7 +38,7 @@ class RobotControllerDelegate : public QObject
 		Q_SIGNAL void poseChanged();
 
 	private:
-		QList<qreal> m_pose;
+		QList<qreal> pose_;
 };
 
 } // namespace rf

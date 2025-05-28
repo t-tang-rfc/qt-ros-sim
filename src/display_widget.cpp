@@ -28,14 +28,14 @@ namespace rf {
 
 DisplayWidget::DisplayWidget(QWidget* parent)
 	: QQuickWidget(parent)
-	, robot_pose(6, 0) // Initialize with 6 elements set to 0
+	, robot_pose_(6, 0) // Initialize with 6 elements set to 0
 {
 	setResizeMode(QQuickWidget::SizeRootObjectToView);
 
 	// Create RobotControllerDelegate as a child
 	auto controller_delegate = new RobotControllerDelegate(this);
 	// Set initial pose values
-	robot_pose = controller_delegate->getPose();
+	robot_pose_ = controller_delegate->getPose();
 
 	// Expose to QML as 'controller'
 	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
@@ -78,20 +78,20 @@ void DisplayWidget::keyPressEvent(QKeyEvent* event)
 
 void DisplayWidget::moveX(qreal delta_x)
 {
-	robot_pose[0] += delta_x;
-	emit setPose(robot_pose);
+	robot_pose_[0] += delta_x;
+	emit setPose(robot_pose_);
 }
 
 void DisplayWidget::moveY(qreal delta_y)
 {
-	robot_pose[1] += delta_y;
-	emit setPose(robot_pose);
+	robot_pose_[1] += delta_y;
+	emit setPose(robot_pose_);
 }
 
 void DisplayWidget::moveZ(qreal delta_z)
 {
-	robot_pose[2] += delta_z;
-	emit setPose(robot_pose);
+	robot_pose_[2] += delta_z;
+	emit setPose(robot_pose_);
 }
 
 } // namespace rf
