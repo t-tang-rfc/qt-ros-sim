@@ -131,8 +131,10 @@ View3D {
 		id: robot_stick
 
 		readonly property real mesh_sz_: 100
-		// pose property [posX, posY, posZ, rotX, rotY, rotZ], controlled by the C++ controller
-		property var pose: controller.pose
+		/// @todo: pose property [posX, posY, posZ, rotX, rotY, rotZ], controlled by the C++ controller
+		// required property RobotControllerDelegate controller
+		// property var pose: controller.pose
+		property var pose: [-100, 100, -100, 0, 0, 0]
 
 		position: Qt.vector3d(pose[0], pose[1], pose[2])
 		eulerRotation: Qt.vector3d(pose[3], pose[4], pose[5])

@@ -21,27 +21,32 @@
 namespace {
 
 const qreal KBD_MOVE_STEP = 5.0; // Default movement step size via keyboard control
+const int WINDOW_WIDTH = 1440; // Default width of the display window
+const int WINDOW_HEIGHT = 810; // Default height of the display window
 
 } // namespace
 
 namespace rf {
 
-DisplayWidget::DisplayWidget(QWidget* parent)
-	: QQuickWidget(parent)
+DisplayWidget::DisplayWidget(QWindow* parent)
+	: QQuickView(parent)
 	, robot_pose_(6, 0) // Initialize with 6 elements set to 0
 {
-	setResizeMode(QQuickWidget::SizeRootObjectToView);
-
+	setTitle("Display Main Window");
+	setWidth(WINDOW_WIDTH);
+	setHeight(WINDOW_HEIGHT);
+	setResizeMode(QQuickView::SizeRootObjectToView);
+	
+	// Set the QML source file
+	setSource(QUrl("qrc:/qml/Display.qml"));
+	
 	// Create RobotControllerDelegate as a child
 	auto controller_delegate = new RobotControllerDelegate(this);
 	// Set initial pose values
 	robot_pose_ = controller_delegate->getPose();
 
-	// Expose to QML as 'controller'
-	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
-
-	// Set the QML source file
-	setSource(QUrl("qrc:/qml/Display.qml"));
+	/// @todo: Expose to QML as 'controller'
+	// setInitialProperties({{"controller", controller_delegate}});
 
 	// Connect signals to controller slots
 	connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
@@ -71,7 +76,7 @@ void DisplayWidget::keyPressEvent(QKeyEvent* event)
 			moveY(-KBD_MOVE_STEP);
 			break;
 		default:
-			QQuickWidget::keyPressEvent(event);
+			QQuickView::keyPressEvent(event);
 			break;
 	}
 }

@@ -1,10 +1,10 @@
-#include <QApplication>
-#include "main_window.hpp"
+#include <QGuiApplication>
+#include "display_widget.hpp"
 
 int main(int argc, char *argv[])
 {
-	QApplication app(argc, argv);
-	rf::MainWindow w;
+	QGuiApplication app(argc, argv);
+	rf::DisplayWidget w;
 	w.show();
 	return app.exec();
 }

@@ -15,18 +15,18 @@
 #ifndef DISPLAY_WIDGET_HPP
 #define DISPLAY_WIDGET_HPP
 
-#include <QQuickWidget>
+#include <QQuickView>
 #include <QtGlobal>
 #include <QList>
 
 namespace rf {
 
-class DisplayWidget : public QQuickWidget
+class DisplayWidget : public QQuickView
 {
 	Q_OBJECT
 
 	public:
-		explicit DisplayWidget(QWidget* parent = nullptr);
+		explicit DisplayWidget(QWindow* parent = nullptr);
 		~DisplayWidget();
 
 	/// @note: the following parts implements a simple robot controller using keyboard input
