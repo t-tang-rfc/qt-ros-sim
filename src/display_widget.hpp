@@ -35,9 +35,7 @@ class DisplayWidget : public QQuickWidget
 		Q_SLOT void moveY(qreal delta_y);
 		Q_SLOT void moveZ(qreal delta_z);
 
-		Q_SIGNAL void setPosX(qreal x);
-		Q_SIGNAL void setPosY(qreal y);
-		Q_SIGNAL void setPosZ(qreal z);
+		Q_SIGNAL void setPose(const QList<qreal>& pose);
 
 	protected:
 		void keyPressEvent(QKeyEvent* event) override;

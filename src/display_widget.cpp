@@ -35,9 +35,7 @@ DisplayWidget::DisplayWidget(QWidget* parent)
 	// Create RobotControllerDelegate as a child
 	auto controller_delegate = new RobotControllerDelegate(this);
 	// Set initial pose values
-	robot_pose = {controller_delegate->posX(), controller_delegate->posY(),
-		controller_delegate->posZ(), controller_delegate->rotX(),
-		controller_delegate->rotY(), controller_delegate->rotZ()};
+	robot_pose = controller_delegate->getPose();
 
 	// Expose to QML as 'controller'
 	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
@@ -46,9 +44,7 @@ DisplayWidget::DisplayWidget(QWidget* parent)
 	setSource(QUrl("qrc:/qml/Display.qml"));
 
 	// Connect signals to controller slots
-	connect(this, &DisplayWidget::setPosX, controller_delegate, &RobotControllerDelegate::setPosX);
-	connect(this, &DisplayWidget::setPosY, controller_delegate, &RobotControllerDelegate::setPosY);
-	connect(this, &DisplayWidget::setPosZ, controller_delegate, &RobotControllerDelegate::setPosZ);	
+	connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
 }
 
 DisplayWidget::~DisplayWidget() = default;
@@ -83,19 +79,19 @@ void DisplayWidget::keyPressEvent(QKeyEvent* event)
 void DisplayWidget::moveX(qreal delta_x)
 {
 	robot_pose[0] += delta_x;
-	emit setPosX(robot_pose[0]);
+	emit setPose(robot_pose);
 }
 
 void DisplayWidget::moveY(qreal delta_y)
 {
 	robot_pose[1] += delta_y;
-	emit setPosY(robot_pose[1]);
+	emit setPose(robot_pose);
 }
 
 void DisplayWidget::moveZ(qreal delta_z)
 {
 	robot_pose[2] += delta_z;
-	emit setPosZ(robot_pose[2]);
+	emit setPose(robot_pose);
 }
 
 } // namespace rf
