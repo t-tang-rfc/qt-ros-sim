@@ -15,8 +15,6 @@
 
 #include <QQuickWidget>
 
-#include "robot_controller_delegate.hpp"
-
 namespace rf {
 
 class DisplayWidget : public QQuickWidget
@@ -25,9 +23,6 @@ class DisplayWidget : public QQuickWidget
 public:
 	explicit DisplayWidget(QWidget* parent = nullptr);
 	~DisplayWidget();
-
-	private:
-		RobotControllerDelegate* m_robotController = nullptr;
 };
 
 } // namespace rf

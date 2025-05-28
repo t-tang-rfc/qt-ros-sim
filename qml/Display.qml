@@ -132,12 +132,12 @@ View3D {
 
 		readonly property real mesh_sz_: 100
 		// These properties will be controlled by the C++ controller
-		property real pos_x_: robotController.posX
-		property real pos_y_: robotController.posY
-		property real pos_z_: robotController.posZ
-		property real rot_x_: robotController.rotX
-		property real rot_y_: robotController.rotY
-		property real rot_z_: robotController.rotZ
+		property real pos_x_: controller.posX
+		property real pos_y_: controller.posY
+		property real pos_z_: controller.posZ
+		property real rot_x_: controller.rotX
+		property real rot_y_: controller.rotY
+		property real rot_z_: controller.rotZ
 		
 		position: Qt.vector3d(robot_stick.pos_x_, robot_stick.pos_y_, robot_stick.pos_z_)
 		eulerRotation: Qt.vector3d(robot_stick.rot_x_, robot_stick.rot_y_, robot_stick.rot_z_)

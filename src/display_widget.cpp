@@ -12,6 +12,8 @@
 
 #include <QQmlContext>
 
+#include "robot_controller_delegate.hpp"
+
 namespace rf {
 
 DisplayWidget::DisplayWidget(QWidget* parent)
@@ -20,10 +22,10 @@ DisplayWidget::DisplayWidget(QWidget* parent)
 	setResizeMode(QQuickWidget::SizeRootObjectToView);
 
 	// Create RobotControllerDelegate as a child
-	m_robotController = new RobotControllerDelegate(this);
+	auto controller_delegate = new RobotControllerDelegate(this);
 
-	// Expose to QML as 'robotController'
-	rootContext()->setContextProperty(QStringLiteral("robotController"), m_robotController);
+	// Expose to QML as 'controller'
+	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
 
 	setSource(QUrl("qrc:/qml/Display.qml"));
 }
