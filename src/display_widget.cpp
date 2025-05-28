@@ -18,64 +18,84 @@
 
 #include "robot_controller_delegate.hpp"
 
+namespace {
+
+const qreal KBD_MOVE_STEP = 5.0; // Default movement step size via keyboard control
+
+} // namespace
+
 namespace rf {
 
 DisplayWidget::DisplayWidget(QWidget* parent)
-: QQuickWidget(parent)
+	: QQuickWidget(parent)
+	, robot_pose(6, 0) // Initialize with 6 elements set to 0
 {
 	setResizeMode(QQuickWidget::SizeRootObjectToView);
 
 	// Create RobotControllerDelegate as a child
-	m_controller = new RobotControllerDelegate(this);
+	auto controller_delegate = new RobotControllerDelegate(this);
+	// Set initial pose values
+	robot_pose = {controller_delegate->posX(), controller_delegate->posY(),
+		controller_delegate->posZ(), controller_delegate->rotX(),
+		controller_delegate->rotY(), controller_delegate->rotZ()};
 
 	// Expose to QML as 'controller'
-	rootContext()->setContextProperty(QStringLiteral("controller"), m_controller);
+	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
+
+	// Set the QML source file
+	setSource(QUrl("qrc:/qml/Display.qml"));
 
 	// Connect signals to controller slots
-	connect(this, &DisplayWidget::setPosX, m_controller, &RobotControllerDelegate::setPosX);
-	connect(this, &DisplayWidget::setPosY, m_controller, &RobotControllerDelegate::setPosY);
-	connect(this, &DisplayWidget::setPosZ, m_controller, &RobotControllerDelegate::setPosZ);
-
-	setSource(QUrl("qrc:/qml/Display.qml"));
+	connect(this, &DisplayWidget::setPosX, controller_delegate, &RobotControllerDelegate::setPosX);
+	connect(this, &DisplayWidget::setPosY, controller_delegate, &RobotControllerDelegate::setPosY);
+	connect(this, &DisplayWidget::setPosZ, controller_delegate, &RobotControllerDelegate::setPosZ);	
 }
 
 DisplayWidget::~DisplayWidget() = default;
 
 void DisplayWidget::keyPressEvent(QKeyEvent* event)
 {
-	qreal x = m_controller->posX();
-	qreal y = m_controller->posY();
-	qreal z = m_controller->posZ();
-
 	switch (event->key()) {
 		case Qt::Key_W:
-			x += m_moveStep;
-			emit setPosX(x);
+			moveX(KBD_MOVE_STEP);
 			break;
 		case Qt::Key_S:
-			x -= m_moveStep;
-			emit setPosX(x);
+			moveX(-KBD_MOVE_STEP);
 			break;
 		case Qt::Key_A:
-			z -= m_moveStep;
-			emit setPosZ(z);
+			moveZ(-KBD_MOVE_STEP);
 			break;
 		case Qt::Key_D:
-			z += m_moveStep;
-			emit setPosZ(z);
+			moveZ(KBD_MOVE_STEP);
 			break;
 		case Qt::Key_Up:
-			y += m_moveStep;
-			emit setPosY(y);
+			moveY(KBD_MOVE_STEP);
 			break;
 		case Qt::Key_Down:
-			y -= m_moveStep;
-			emit setPosY(y);
+			moveY(-KBD_MOVE_STEP);
 			break;
 		default:
 			QQuickWidget::keyPressEvent(event);
 			break;
 	}
+}
+
+void DisplayWidget::moveX(qreal delta_x)
+{
+	robot_pose[0] += delta_x;
+	emit setPosX(robot_pose[0]);
+}
+
+void DisplayWidget::moveY(qreal delta_y)
+{
+	robot_pose[1] += delta_y;
+	emit setPosY(robot_pose[1]);
+}
+
+void DisplayWidget::moveZ(qreal delta_z)
+{
+	robot_pose[2] += delta_z;
+	emit setPosZ(robot_pose[2]);
 }
 
 } // namespace rf

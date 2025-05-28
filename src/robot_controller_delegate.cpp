@@ -3,6 +3,10 @@
  * 
  * @brief: Implementation of RobotControllerDelegate class
  * 
+ * @author:
+ * - madpang
+ * - t-tang-rfc
+ * 
  * @date:
  * - created on 2025-05-26
  * - updated on 2025-05-28
@@ -10,16 +14,24 @@
 
 #include "robot_controller_delegate.hpp"
 
+#include <QList>
+
+namespace rf {
+
+const QList<qreal> DEFAULT_POSE = { -100, 100, -100, 0, 0, 0 };
+
+}
+
 namespace rf {
 
 RobotControllerDelegate::RobotControllerDelegate(QObject *parent)
 	: QObject(parent)
-	, m_posX(-100)
-	, m_posY(100)
-	, m_posZ(-100)
-	, m_rotX(0)
-	, m_rotY(0)
-	, m_rotZ(0)
+	, m_posX(DEFAULT_POSE[0])
+	, m_posY(DEFAULT_POSE[1])
+	, m_posZ(DEFAULT_POSE[2])
+	, m_rotX(DEFAULT_POSE[3])
+	, m_rotY(DEFAULT_POSE[4])
+	, m_rotZ(DEFAULT_POSE[5])
 {
 	// Initialize with the same default values as in QML
 }
@@ -81,12 +93,12 @@ void RobotControllerDelegate::setRotZ(qreal z)
 
 void RobotControllerDelegate::reset()
 {
-	setPosX(-100);
-	setPosY(100);
-	setPosZ(-100);
-	setRotX(0);
-	setRotY(0);
-	setRotZ(0);
+	setPosX(DEFAULT_POSE[0]);
+	setPosY(DEFAULT_POSE[1]);
+	setPosZ(DEFAULT_POSE[2]);
+	setRotX(DEFAULT_POSE[3]);
+	setRotY(DEFAULT_POSE[4]);
+	setRotZ(DEFAULT_POSE[5]);
 }
 
 } // namespace rf

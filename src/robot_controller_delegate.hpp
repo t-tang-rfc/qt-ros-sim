@@ -3,7 +3,9 @@
  * 
  * @brief: A controller delegate class for the robot in the 3D scene
  * 
- * @author: madpang
+ * @author:
+ * - madpang
+ * - t-tang-rfc
  *
  * @date:
  * - created on 2025-05-26

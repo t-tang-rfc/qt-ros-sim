@@ -16,7 +16,8 @@
 #define DISPLAY_WIDGET_HPP
 
 #include <QQuickWidget>
-#include "robot_controller_delegate.hpp"
+#include <QtGlobal>
+#include <QList>
 
 namespace rf {
 
@@ -28,17 +29,23 @@ class DisplayWidget : public QQuickWidget
 		explicit DisplayWidget(QWidget* parent = nullptr);
 		~DisplayWidget();
 
-	signals:
-		void setPosX(qreal x);
-		void setPosY(qreal y);
-		void setPosZ(qreal z);
+	/// @note: the following parts implements a simple robot controller using keyboard input
+
+		Q_SLOT void moveX(qreal delta_x);
+		Q_SLOT void moveY(qreal delta_y);
+		Q_SLOT void moveZ(qreal delta_z);
+
+		Q_SIGNAL void setPosX(qreal x);
+		Q_SIGNAL void setPosY(qreal y);
+		Q_SIGNAL void setPosZ(qreal z);
 
 	protected:
 		void keyPressEvent(QKeyEvent* event) override;
 
 	private:
-		RobotControllerDelegate* m_controller = nullptr;
-		const qreal m_moveStep = 5.0;
+		QList<qreal> robot_pose; // a 6-element list for robot pose tracking
+
+	/// <<<
 };
 
 } // namespace rf
