@@ -1,15 +1,17 @@
 /**
  * @file: main_window.hpp
  * 
+ * @author: madpang
+ * 
  * @brief: GUI main window
  * 
  * @details:
  * The GUI mainwindow contains:
- * - a display widget
+ * - a display widget for rendering a QML scene
  * 
  * @date:
  * - created on 2025-05-22
- * - updated on 2025-05-22
+ * - updated on 2025-05-26
  **/
 
 #ifndef MAIN_WINDOW_HPP
@@ -18,20 +20,17 @@
 #include <QMainWindow>
 #include <QWidget>
 
-namespace rf
+namespace rf {
+
+class MainWindow : public QMainWindow
 {
-
-	class MainWindow : public QMainWindow
-	{
-		Q_OBJECT
-
+	Q_OBJECT
+	
 	public:
 		explicit MainWindow(QWidget* parent = nullptr);
 		~MainWindow();
+};
 
-	private:
-		void setupUi();
-	};
 }
 
 #endif // MAIN_WINDOW_HPP

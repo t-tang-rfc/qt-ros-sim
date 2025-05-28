@@ -21,6 +21,7 @@ add_executable(qt_ros_sim
     src/main.cpp
     src/main_window.cpp
     src/display_widget.cpp
+    # src/robot_stick_controller.cpp
     ${QML_RESOURCES}
 )
 

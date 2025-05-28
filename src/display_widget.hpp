@@ -1,6 +1,8 @@
 /**
  * @file: display_widget.hpp
  * 
+ * @author: madpang
+ * 
  * @brief: a widget for displaying a QML scene and allow user interaction
  * 
  * @date:
@@ -16,11 +18,13 @@
 
 namespace rf {
 
-class DisplayWidget : public QQuickWidget {
-    Q_OBJECT
-public:
-    explicit DisplayWidget(QWidget* parent = nullptr);
-    ~DisplayWidget();
+class DisplayWidget : public QQuickWidget
+{
+	Q_OBJECT
+	
+	public:
+		explicit DisplayWidget(QWidget* parent = nullptr);
+		~DisplayWidget();
 };
 
 } // namespace rf

@@ -10,7 +10,7 @@ import QtQuick3D.Helpers
 View3D {
 	id: viewport
 	anchors.fill: parent
-	camera: camera_node		
+	camera: camera_node
 
 	environment: SceneEnvironment {
 		clearColor: "skyblue"
@@ -33,6 +33,7 @@ View3D {
 			clipNear: 1
 		}
 	}
+
 	OrbitCameraController {
 		anchors.fill: parent
 		origin: origin_node
@@ -129,14 +130,15 @@ View3D {
 	Node {
 		id: robot_stick
 
-		property real mesh_sz_: 100
+		readonly property real mesh_sz_: 100
+		// These properties will be controlled by the C++ controller
 		property real pos_x_: -100
 		property real pos_y_: 100
 		property real pos_z_: -100
 		property real rot_x_: 0
 		property real rot_y_: 0
 		property real rot_z_: 0
-
+		
 		position: Qt.vector3d(robot_stick.pos_x_, robot_stick.pos_y_, robot_stick.pos_z_)
 		eulerRotation: Qt.vector3d(robot_stick.rot_x_, robot_stick.rot_y_, robot_stick.rot_z_)
 

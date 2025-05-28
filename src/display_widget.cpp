@@ -5,16 +5,20 @@
  * 
  * @date:
  * - created on 2025-05-22
- * - updated on 2025-05-22
+ * - updated on 2025-05-26
  **/
 
 #include "display_widget.hpp"
 
-rf::DisplayWidget::DisplayWidget(QWidget* parent)
-    : QQuickWidget(parent)
+namespace rf {
+
+DisplayWidget::DisplayWidget(QWidget* parent)
+: QQuickWidget(parent)
 {
-    setResizeMode(QQuickWidget::SizeRootObjectToView);
-    setSource(QUrl("qrc:/qml/Display.qml"));
+	setResizeMode(QQuickWidget::SizeRootObjectToView);
+	setSource(QUrl("qrc:/qml/Display.qml"));
 }
 
-rf::DisplayWidget::~DisplayWidget() = default;
+DisplayWidget::~DisplayWidget() = default;
+
+}
