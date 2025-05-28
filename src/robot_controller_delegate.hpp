@@ -14,6 +14,7 @@
 #define ROBOT_CONTROLLER_DELEGATE_HPP
 
 #include <QObject>
+#include <QtGlobal>
 
 namespace rf {
 
@@ -36,22 +37,20 @@ class RobotControllerDelegate : public QObject
 		qreal rotY() const;
 		qreal rotZ() const;
 
-	public Q_SLOTS:
-		void setPosX(qreal x);
-		void setPosY(qreal y);
-		void setPosZ(qreal z);
-		void setRotX(qreal x);
-		void setRotY(qreal y);
-		void setRotZ(qreal z);
-		void reset();
+		Q_SLOT void setPosX(qreal x);
+		Q_SLOT void setPosY(qreal y);
+		Q_SLOT void setPosZ(qreal z);
+		Q_SLOT void setRotX(qreal x);
+		Q_SLOT void setRotY(qreal y);
+		Q_SLOT void setRotZ(qreal z);
+		Q_SLOT void reset();
 	
-	Q_SIGNALS:
-		void posXChanged();
-		void posYChanged();
-		void posZChanged();
-		void rotXChanged();
-		void rotYChanged();
-		void rotZChanged();
+		Q_SIGNAL void posXChanged();
+		Q_SIGNAL void posYChanged();
+		Q_SIGNAL void posZChanged();
+		Q_SIGNAL void rotXChanged();
+		Q_SIGNAL void rotYChanged();
+		Q_SIGNAL void rotZChanged();
 
 	private:
 		qreal m_posX;

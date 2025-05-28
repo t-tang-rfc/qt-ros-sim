@@ -9,114 +9,84 @@
  **/
 
 #include "robot_controller_delegate.hpp"
-#include <QtMath>
 
 namespace rf {
 
 RobotControllerDelegate::RobotControllerDelegate(QObject *parent)
-    : QObject(parent)
-    , m_posX(-100)
-    , m_posY(100)
-    , m_posZ(-100)
-    , m_rotX(0)
-    , m_rotY(0)
-    , m_rotZ(0)
+	: QObject(parent)
+	, m_posX(-100)
+	, m_posY(100)
+	, m_posZ(-100)
+	, m_rotX(0)
+	, m_rotY(0)
+	, m_rotZ(0)
 {
-    // Initialize with the same default values as in QML
+	// Initialize with the same default values as in QML
 }
 
-qreal RobotControllerDelegate::posX() const
-{
-    return m_posX;
-}
+qreal RobotControllerDelegate::posX() const { return m_posX; }
+qreal RobotControllerDelegate::posY() const { return m_posY; }
+qreal RobotControllerDelegate::posZ() const { return m_posZ; }
+qreal RobotControllerDelegate::rotX() const { return m_rotX; }
+qreal RobotControllerDelegate::rotY() const { return m_rotY; }
+qreal RobotControllerDelegate::rotZ() const { return m_rotZ; }
 
 void RobotControllerDelegate::setPosX(qreal x)
 {
-    if (qFuzzyCompare(m_posX, x))
-        return;
-    
-    m_posX = x;
-    emit posXChanged();
-}
-
-qreal RobotControllerDelegate::posY() const
-{
-    return m_posY;
+	if (!qFuzzyCompare(m_posX, x)) {
+		m_posX = x;
+		emit posXChanged();
+	}
 }
 
 void RobotControllerDelegate::setPosY(qreal y)
 {
-    if (qFuzzyCompare(m_posY, y))
-        return;
-    
-    m_posY = y;
-    emit posYChanged();
-}
-
-qreal RobotControllerDelegate::posZ() const
-{
-    return m_posZ;
+	if (!qFuzzyCompare(m_posY, y)) {
+		m_posY = y;
+		emit posYChanged();
+	}
 }
 
 void RobotControllerDelegate::setPosZ(qreal z)
 {
-    if (qFuzzyCompare(m_posZ, z))
-        return;
-    
-    m_posZ = z;
-    emit posZChanged();
-}
-
-qreal RobotControllerDelegate::rotX() const
-{
-    return m_rotX;
+	if (!qFuzzyCompare(m_posZ, z)) {
+		m_posZ = z;
+		emit posZChanged();
+	}
 }
 
 void RobotControllerDelegate::setRotX(qreal x)
 {
-    if (qFuzzyCompare(m_rotX, x))
-        return;
-    
-    m_rotX = x;
-    emit rotXChanged();
-}
-
-qreal RobotControllerDelegate::rotY() const
-{
-    return m_rotY;
+	if (!qFuzzyCompare(m_rotX, x)) {
+		m_rotX = x;
+		emit rotXChanged();
+	}
 }
 
 void RobotControllerDelegate::setRotY(qreal y)
 {
-    if (qFuzzyCompare(m_rotY, y))
-        return;
-    
-    m_rotY = y;
-    emit rotYChanged();
+	if (!qFuzzyCompare(m_rotY, y)) {
+		m_rotY = y;
+		emit rotYChanged();
+	}
 }
 
-qreal RobotStickController::rotZ() const
+void RobotControllerDelegate::setRotZ(qreal z)
 {
-    return m_rotZ;
+	if (!qFuzzyCompare(m_rotZ, z)) {
+		m_rotZ = z;
+		emit rotZChanged();
+	}
 }
 
-void RobotStickController::setRotZ(qreal z)
+void RobotControllerDelegate::reset()
 {
-    if (qFuzzyCompare(m_rotZ, z))
-        return;
-    
-    m_rotZ = z;
-    emit rotZChanged();
-}
-
-void RobotStickController::reset()
-{
-    setPosX(-100);
-    setPosY(100);
-    setPosZ(-100);
-    setRotX(0);
-    setRotY(0);
-    setRotZ(0);
+	setPosX(-100);
+	setPosY(100);
+	setPosZ(-100);
+	setRotX(0);
+	setRotY(0);
+	setRotZ(0);
 }
 
 } // namespace rf
