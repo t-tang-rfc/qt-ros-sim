@@ -18,14 +18,12 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QList>
-#include <QtQml/qqml.h>
 
 namespace rf {
 
 class RobotControllerDelegate : public QObject
 {
 	Q_OBJECT
-	QML_ELEMENT
 	Q_PROPERTY(QList<qreal> pose READ getPose WRITE setPose NOTIFY poseChanged)
 
 	public:

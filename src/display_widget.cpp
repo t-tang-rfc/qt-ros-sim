@@ -47,6 +47,7 @@ DisplayWidget::DisplayWidget(QWindow* parent)
 
 	/// @todo: Expose to QML as 'controller'
 	// setInitialProperties({{"controller", controller_delegate}});
+	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
 
 	// Connect signals to controller slots
 	connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
