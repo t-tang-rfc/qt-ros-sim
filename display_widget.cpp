@@ -37,20 +37,20 @@ DisplayWidget::DisplayWidget(QWindow* parent)
 	setHeight(WINDOW_HEIGHT);
 	setResizeMode(QQuickView::SizeRootObjectToView);
 	
-	// Set the QML source file
-	setSource(QUrl("qrc:/qml/Display.qml"));
+	// Load the module defined by `qt_add_qml_module` in CMakeLists.txt
+	loadFromModule("RobotSimulator", "Display");
 	
 	// Create RobotControllerDelegate as a child
-	auto controller_delegate = new RobotControllerDelegate(this);
+	// auto controller_delegate = new RobotControllerDelegate(this);
 	// Set initial pose values
-	robot_pose_ = controller_delegate->getPose();
+	// robot_pose_ = controller_delegate->getPose();
 
 	/// @todo: Expose to QML as 'controller'
 	// setInitialProperties({{"controller", controller_delegate}});
-	rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
+	// rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
 
 	// Connect signals to controller slots
-	connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
+	// connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
 }
 
 DisplayWidget::~DisplayWidget() = default;

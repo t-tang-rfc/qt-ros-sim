@@ -10,3 +10,4 @@ tmp*
 
 # Build artifacts
 build/
+.qmlls.ini

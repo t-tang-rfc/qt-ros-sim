@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
+import RobotSimulator
 // @note: Coordinates frame of the 3D world is:
 // - the positive direction of the x axis is to the right
 // - positive y points upwards
@@ -9,12 +10,19 @@ import QtQuick3D.Helpers
 
 View3D {
 	id: viewport
+
 	anchors.fill: parent
 	camera: camera_node
 
 	environment: SceneEnvironment {
 		clearColor: "skyblue"
 		backgroundMode: SceneEnvironment.Color
+	}
+
+	RobotControllerDelegate {
+		id: controller
+		// @note: The controller delegate is responsible for updating the pose of the stick, and it is  implemented in C++ and registered as a QML type.
+		// The pose is an array of 6 elements: [posX, posY, posZ, rotX, rotY, rotZ].
 	}
 
 	DirectionalLight {

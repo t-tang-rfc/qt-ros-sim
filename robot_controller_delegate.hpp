@@ -6,6 +6,10 @@
  * @author:
  * - madpang
  * - t-tang-rfc
+ * 
+ * @note:
+ * - Qt6 is changing drastically, and documentation is far from complete.
+ * - see https://doc.qt.io/qt-6/qqmlintegration-h-qtqml-proxy.html for the macro definitions
  *
  * @date:
  * - created on 2025-05-26
@@ -18,12 +22,14 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QList>
+#include <qqmlintegration.h>
 
 namespace rf {
 
 class RobotControllerDelegate : public QObject
 {
 	Q_OBJECT
+	QML_ELEMENT
 	Q_PROPERTY(QList<qreal> pose READ getPose WRITE setPose NOTIFY poseChanged)
 
 	public:
