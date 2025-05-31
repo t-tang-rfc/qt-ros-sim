@@ -10,10 +10,11 @@
  * @note:
  * - Qt6 is changing drastically, and documentation is far from complete.
  * - see https://doc.qt.io/qt-6/qqmlintegration-h-qtqml-proxy.html for the macro definitions
+ * - see https://doc.qt.io/qt-6/qtqml-cppintegration-definetypes.html which says if you are already linking to QtQml, you can use `qqmlregistration.h` which includes the necessary headers
  *
  * @date:
  * - created on 2025-05-26
- * - updated on 2025-05-28
+ * - updated on 2025-05-31
  **/
 
 #ifndef ROBOT_CONTROLLER_DELEGATE_HPP
@@ -22,7 +23,7 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QList>
-#include <qqmlintegration.h>
+#include <QtQml/qqmlregistration.h>
 
 namespace rf {
 

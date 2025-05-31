@@ -1,12 +1,21 @@
+/**
+ * @file Display.qml
+ * @brief A simple 3D scene with a stick and axes to visualize the robot's pose.
+ * @author: madpang
+ * @date:
+ * - created on 2025-05-22
+ * - updated on 2025-05-31
+ * @note: Coordinates frame of the 3D world is:
+ * - the positive direction of the x axis is to the right
+ * - positive y points upwards
+ * - and positive z out of the screen.
+ * @see: https://www.qt.io/product/qt6/qml-book/ch12-qtquick3d-basics
+ **/
+
 import QtQuick
 import QtQuick3D
 import QtQuick3D.Helpers
 import RobotSimulator
-// @note: Coordinates frame of the 3D world is:
-// - the positive direction of the x axis is to the right
-// - positive y points upwards
-// - and positive z out of the screen.
-// @see: https://www.qt.io/product/qt6/qml-book/ch12-qtquick3d-basics
 
 View3D {
 	id: viewport
@@ -21,8 +30,10 @@ View3D {
 
 	RobotControllerDelegate {
 		id: controller
-		// @note: The controller delegate is responsible for updating the pose of the stick, and it is  implemented in C++ and registered as a QML type.
-		// The pose is an array of 6 elements: [posX, posY, posZ, rotX, rotY, rotZ].
+		objectName: "controller"
+		// @brief: The controller delegate is responsible for updating the pose of the stick, and it is  implemented in C++ and registered as a QML type.
+		// @details: The pose is an array of 6 elements: [posX, posY, posZ, rotX, rotY, rotZ].
+		// @note: objectName is used to access the controller from C++ code.
 	}
 
 	DirectionalLight {
@@ -139,8 +150,6 @@ View3D {
 		id: robot_stick
 
 		readonly property real mesh_sz_: 100
-		/// @todo: pose property [posX, posY, posZ, rotX, rotY, rotZ], controlled by the C++ controller
-		// required property RobotControllerDelegate controller
 		property var pose: controller.pose
 
 		position: Qt.vector3d(pose[0], pose[1], pose[2])

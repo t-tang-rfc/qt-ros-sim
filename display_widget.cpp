@@ -9,12 +9,13 @@
  * 
  * @date:
  * - created on 2025-05-22
- * - updated on 2025-05-26
+ * - updated on 2025-05-31
  **/
 
 #include "display_widget.hpp"
 
-#include <QQmlContext>
+#include <QQuickItem>
+#include <QtLogging>
 
 #include "robot_controller_delegate.hpp"
 
@@ -39,18 +40,18 @@ DisplayWidget::DisplayWidget(QWindow* parent)
 	
 	// Load the module defined by `qt_add_qml_module` in CMakeLists.txt
 	loadFromModule("RobotSimulator", "Display");
-	
-	// Create RobotControllerDelegate as a child
-	// auto controller_delegate = new RobotControllerDelegate(this);
-	// Set initial pose values
-	// robot_pose_ = controller_delegate->getPose();
 
-	/// @todo: Expose to QML as 'controller'
-	// setInitialProperties({{"controller", controller_delegate}});
-	// rootContext()->setContextProperty(QStringLiteral("controller"), controller_delegate);
+	// Retrieve the controller delegate from the QML
+	auto controller_delegate = rootObject()->findChild<RobotControllerDelegate*>("controller");
+	if (controller_delegate) {
+		// Set initial pose values
+		robot_pose_ = controller_delegate->getPose();
 
-	// Connect signals to controller slots
-	// connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
+		// Connect signals to controller slots
+		connect(this, &DisplayWidget::setPose, controller_delegate, &RobotControllerDelegate::setPose);
+	} else {
+		qWarning() << "Controller delegate not retrieved from QML. You will NOT be able to control the robot.";
+	}
 }
 
 DisplayWidget::~DisplayWidget() = default;
