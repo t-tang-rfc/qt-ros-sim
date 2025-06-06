@@ -15,7 +15,7 @@ set(QT_QML_GENERATE_QMLLS_INI ON)
 
 add_executable(qt_ros_sim
 	main.cpp
-	display_widget.cpp
+	main_window.cpp
 )
 
 target_link_libraries(qt_ros_sim PRIVATE Qt6::Core Qt6::Gui Qt6::Quick Qt6::Qml)
@@ -24,7 +24,7 @@ qt_add_qml_module(qt_ros_sim
 	URI RobotSimulator
 	VERSION 1.0
 	QML_FILES
-		Display.qml
+		Main.qml
 	SOURCES
 		robot_controller_delegate.cpp
 		robot_controller_delegate.hpp
