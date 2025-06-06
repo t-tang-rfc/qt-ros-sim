@@ -84,17 +84,17 @@ void MainWindow::keyPressEvent(QKeyEvent* event)
 
 void MainWindow::moveX(qreal delta_x) {
 	robot_pose_[0] += delta_x;
-	emit setPose(robot_pose_);
+	Q_EMIT setPose(robot_pose_);
 }
 
 void MainWindow::moveY(qreal delta_y) {
 	robot_pose_[1] += delta_y;
-	emit setPose(robot_pose_);
+	Q_EMIT setPose(robot_pose_);
 }
 
 void MainWindow::moveZ(qreal delta_z) {
 	robot_pose_[2] += delta_z;
-	emit setPose(robot_pose_);
+	Q_EMIT setPose(robot_pose_);
 }
 
 } // namespace rf

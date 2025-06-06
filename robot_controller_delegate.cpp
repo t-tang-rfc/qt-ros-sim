@@ -39,7 +39,7 @@ void RobotControllerDelegate::setPose(const QList<qreal>& pose)
 {
 	if (pose_ != pose) {
 		pose_ = pose;
-		emit poseChanged();
+		Q_EMIT poseChanged();
 	}
 }
 

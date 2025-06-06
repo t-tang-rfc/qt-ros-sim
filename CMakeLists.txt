@@ -24,6 +24,7 @@ find_package(Qt6 REQUIRED COMPONENTS
 )
 
 qt_standard_project_setup(REQUIRES 6.8)
+add_definitions(-DQT_NO_KEYWORDS)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -128,6 +129,7 @@ catkin_package(
 add_executable(simulation_node
 	main.cpp
 	main_window.cpp
+	joystick_controller.cpp
 )
 
 target_link_libraries(simulation_node PRIVATE
@@ -136,6 +138,7 @@ target_link_libraries(simulation_node PRIVATE
 	Qt6::Qml
 	Qt6::Quick
 	Qt6::Quick3D
+	${catkin_LIBRARIES}
 )
 
 qt_add_qml_module(simulation_node

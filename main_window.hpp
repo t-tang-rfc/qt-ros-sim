@@ -1,8 +1,6 @@
 /**
  * @file: main_window.hpp
  * 
- * @author: madpang
- * 
  * @brief: GUI main window
  * 
  * @author:
