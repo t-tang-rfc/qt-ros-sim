@@ -20,6 +20,8 @@
 #include <ros/ros.h>
 #include <sensor_msgs/Joy.h>
 
+namespace rf {
+
 class JoystickController : public QObject
 {
 	Q_OBJECT
@@ -36,5 +38,7 @@ class JoystickController : public QObject
 
 		QList<qreal> robot_pose_; // a 6-element list for robot pose tracking
 };
+
+} // namespace rf
 
 #endif // JOYSTICK_CONTROLLER_HPP

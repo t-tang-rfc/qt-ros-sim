@@ -12,6 +12,8 @@
 
 #include "joystick_controller.hpp"
 
+namespace rf {
+
 JoystickController::JoystickController(QObject* parent)
 	: QObject(parent)
 	, nh_(ros::NodeHandle())
@@ -28,3 +30,5 @@ void JoystickController::joyCallback(const sensor_msgs::Joy::ConstPtr& msg)
 {
 	ROS_INFO("Joy callback called!");
 }
+
+} // namespace rf
