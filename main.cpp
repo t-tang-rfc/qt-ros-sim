@@ -20,6 +20,8 @@ int main(int argc, char *argv[])
     // --- [4] Setup Qt application ---
 	QGuiApplication app(argc, argv);
 
+	rf::MainWindow w;
+
 	// --- [5] Signal-slot connections ---
 
 	// Connect shutdowns for clean exit if user closes either loop
@@ -27,9 +29,9 @@ int main(int argc, char *argv[])
 	QObject::connect(&app, &QCoreApplication::aboutToQuit, []() { ros::shutdown(); });
 
 	// @todo: connect JoystickController and MainWindow
+	QObject::connect(&joystick_controller, &rf::JoystickController::moveX, &w, &rf::MainWindow::moveX, Qt::QueuedConnection);
 
 	// --- [6] Show MainWindow scene ---
-	rf::MainWindow w;
 	w.show();
 
 	// --- [7] Enter main event loop (both ROS and Qt now running) ---

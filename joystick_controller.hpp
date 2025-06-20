@@ -30,6 +30,8 @@ class JoystickController : public QObject
 		explicit JoystickController(QObject* parent = nullptr);
 		~JoystickController();
 
+		Q_SIGNAL void moveX(qreal delta_x);
+
 	private:	
 		void joyCallback(const sensor_msgs::Joy::ConstPtr& msg);
 		

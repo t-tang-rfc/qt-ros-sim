@@ -29,6 +29,7 @@ JoystickController::~JoystickController() = default;
 void JoystickController::joyCallback(const sensor_msgs::Joy::ConstPtr& msg)
 {
 	ROS_INFO("Joy callback called!");
+	Q_EMIT moveX(msg->axes[0]); // Assuming the first axis controls X movement
 }
 
 } // namespace rf
